@@ -1,26 +1,29 @@
-const $ = require("jquery")
+const $ = require("jquery") // importing jQuery into file
 
 const contactCollectionModule = require("./ContactCollection")
 const contactListModule = require("./ContactList")
 
-const addNewContact = () => {
+// why are we putting addNewContact function outside of object?
+
+const addNewContact = () => { // function that gets value from input fields
   const newContactName = $(".name-form-field").val()
   const newContactPhone = $(".phone-form-field").val()
   const newContactAddr = $(".addr-form-field").val()
   console.log("add button clicked", newContactName, newContactPhone, newContactAddr);
-  contactCollectionModule.postContact(newContactName, newContactPhone, newContactAddr)
-  .then((response) => {
+  contactCollectionModule.postContact(newContactName, newContactPhone, newContactAddr) // storing new contact data into the postContact ajax/json function
+  .then((response) => { // handles a successful call
     console.log("response", response)
-    contactListModule.buildContactList()
+    contactListModule.buildContactList() // calling function that prints contacts
   })
 }
 
+// dynamically creating HTML elements for contact to be filled out and subitted by user
 const contactForm = Object.create({}, {
   buildContactForm: {
     value: function() {
-      const formArticle = document.createElement("article")
+      const formArticle = document.createElement("article") 
 
-      const nameSection = document.createElement("section")
+      const nameSection = document.createElement("section") 
 
       const nameLabel = document.createElement("label")
       nameLabel.textContent = "Name: "
